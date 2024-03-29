@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparta BAU tool</title>
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/cdi_styles.css') }}">
+</head>
+<body>
+    <div class="title1"><b>SAINSBURY'S</div>
+    <div class="container">
+    <div class="card">
+    <h1 class="title">CDI Retail File Splitter</h1>
+    <div class="upload-section">
+    <form method="POST" enctype="multipart/form-data" action="{{url_for('cdi_split')}}">
+        <label for="file">Select CDI CSV file:</label>
+        <input type="file" id="file" name="file" accept=".csv" required><br><br>
+        <label for="output_folder">Choose Output Folder:</label>
+        <input type="text" id="output_folder" name="output_folder" placeholder="Enter output folder"><br><br>
+    </div>
+    <input class='btn' type="submit" value="Process CDI Errors">
+    </form>
+    <div id="result"></div>
+    </div>
+    <div class="blob"></div>
+</body>
+</html>

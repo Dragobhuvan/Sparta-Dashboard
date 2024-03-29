@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accrual details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <style>
+        .content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            font-family: "MaryAnn",Mary Ann,"Trebuchet MS",Arial,Helvetica,sans-serif;
+            font-size: 20px;
+        }
+
+        .content label{
+            float: left;
+        }
+
+        .content input {
+            float: right;
+            margin-left: 20px ;
+        }
+
+        .content sub{
+            float: right;
+        }
+        #head-text{
+            color: whitesmoke;
+            background-color: #fc7100;
+            font-family: "MaryAnn-ExtraBold",Mary Ann,"Trebuchet MS",Arial,Helvetica,sans-serif;
+            }
+
+        h6{
+            color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="head-text">Accrual details</h1>
+    <br>
+    <p>
+        <h6 class="bg-dark">Note: Provide date in yyyy-mm-dd hh:mm:ss.sss format only</h6>    
+    </p>
+    <div class="content">
+    <form action="{{url_for('M_rst_count')}}" method="post">
+        <label>From:</label>
+        <input type="text" id="fromdate" name="fromdate">
+        <br><br>
+        <label>To: </label>
+        <input type="text" id="todate" name="todate"><br><br>
+        <input type="submit" value="submit">
+    </form>
+    </div>
+</body>
+</html>
