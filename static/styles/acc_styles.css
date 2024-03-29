@@ -1,0 +1,51 @@
+/* header{
+    text-align: center;
+    background-color: rgb(240, 108, 0);
+    color: whitesmoke;
+} */
+body{
+    background-color: whitesmoke;
+}
+.card{
+    background-color:  #fc7100;
+    margin: auto;
+    color: #F1EFEF;
+    font-weight: bold;
+    font-family: "MaryAnn",Mary Ann,"Trebuchet MS",Arial,Helvetica,sans-serif;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.head{
+    margin-top: 10px;
+}
+
+#head-text{
+   color: whitesmoke;
+   background-color: #fc7100;
+   font-family: "MaryAnn-ExtraBold",Mary Ann,"Trebuchet MS",Arial,Helvetica,sans-serif;
+   margin-top: 20px;
+   padding: 30px;
+}
+
+#logo{
+    /* color: whitesmoke; */
+    font-family: "MaryAnn-Extrabold",Mary Ann,"Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-weight: 700;
+    color: #fc7100;
+    margin-left: 10px;
+}
+
+.card-title{
+    font-size: 2rem;
+}
+
+.card-text{
+    font-size: 18px;
+}
+
