@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Payroll</title>
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/pyrl_styles.css') }}">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script>src="{{url_for('static', filename='scripts/pyrl.js')}}" </script>
+    
+</head>
+<!-- <div>
+    <div class="header">         
+        <a href="#default" class="logo" onclick="hamburgerclick()"><span class="kronos-logo">k</span>-<span class="rota">ROTA</span></a>
+        <div class="header-right">
+        <div class = 'logo'>Sainsbury's</div>
+    </div>
+    </div> -->
+<body>
+    <div class = fillpage>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!">Sainsbury's</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5" >
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5 ">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Payroll validation</h1>
+                            <p class="lead text-white-50 mb-4">Clicking the icon below will connect with DB and will give the payroll validation details</p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features" >Start Validation</a>
+                                <a class="btn btn-outline-light btn-lg px-4" href="{{url_for('dashboard')}}">Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+    </div>
+    <div id="features">
+        <div class="flex-container">
+            <div class="flex-item-right">Location Query
+                <hr class="new">
+                <div> {{Location}} </div>
+            </div>
+            <div class="flex-item-left">Signoff Colleagues
+                <hr class="new">
+                <div> {{SignOff_Colleagues}} </div>
+            </div>
+            <div class="flex-item-right">Pay Processed No
+                <hr class="new">
+                <div> {{PayProcessed_Colleagues}} </div>
+            </div>
+            <div class="flex-item-left">SignOff Records
+                <hr class="new">
+                <div> {{SignOff_Records}} </div> 
+            </div>
+        </div>
+        <div class="flex-container"> 
+            <div class="flex-item-right">Pay Processed Records
+                <hr class="new">
+                <div> {{PayProcessed_Records}} </div>
+            </div>
+            <div class="flex-item-left">Signoff Colleagues
+                <hr class="new">
+                <div> {{SignOff_Colleagues}} </div>
+            </div>
+            <!-- <div class="flex-item-right">Pay Processed No
+                <hr class="new">
+                <div> {{PayProcessed_Colleagues}} </div>
+            </div>
+            <div class="flex-item-left">SignOff Records
+                <hr class="new">
+                <div> {{SignOff_Records}} </div>  -->
+        </div>
+    </div>
+</body>
+</html>

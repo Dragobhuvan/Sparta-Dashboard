@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earned</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/taken_styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-5">
+            <a class="navbar-brand" href="#!">Sainsbury's</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url_for('dashboard')}}">Home</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Services</a></li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="border-bottom">
+        <div class="container contact-form">
+            <!-- <div class="contact-image">
+            <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact" />
+        </div> -->
+            <form action="{{url_for('Earned_count')}}" method="post">
+                <h3>Accruals - Earned </h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="CID" class="form-control" placeholder="Employee id*" value="" required/>
+                        </div>
+                        <div class="form-group">
+                            <!-- <input type="text" name="fromdate" class="form-control" placeholder="From date *" value="" /> -->
+                            <div class="form-control">
+                                <label for="fromdate" style="margin-right: 100px;">From:</label>
+                                <input type="datetime-local" id="fromdate" name="fromdate" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <input type="text" name="todate" class="form-control" placeholder="To date *" value="" /> -->
+                            <div class="form-control">
+                                <label for="todate" style="margin-right: 120px;">To:</label>
+                                <input type="datetime-local" id="todate" name="todate" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" name="btnSubmit" class="btnContact" value="View taken" />
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <p>
+                            <h6>Note: </h6><br>
+                            <h6>
+                                Provide date in <br><b>yyyy-mm-dd hh:mm:ss.sss</b> <br> format only
+                            </h6>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

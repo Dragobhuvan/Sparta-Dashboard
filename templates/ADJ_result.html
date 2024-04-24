@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taken Results</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <style>
+        html,
+        body,
+        .intro {
+            height: 100%;
+        }
+        
+        .gradient-custom-2 {
+            /* fallback for old browsers */
+            background: #061a32;
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(left, #0f1c2d, #595a5a);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            /* background: linear-gradient(to top, rgb(151, 148, 152), rgb(130, 132, 138)) */
+        }
+        
+        table td,
+        table th {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        thead th,
+        tbody th {
+            color: rgb(8, 8, 8);
+        }
+        
+        tbody td {
+            font-weight: 500;
+            color: rgba(14, 14, 14, 0.65);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fillpage">
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!">Sainsbury's</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url_for('dashboard')}}">Home</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5 ">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Total Earned : {{total_earned}}</h1>
+                            <p class="lead text-white-50 mb-4">Use the below buttons to navigate to home or accrual app</p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">View details</a>
+                                <a class="btn btn-outline-light btn-lg px-4" href="{{url_for('acc_app')}}">Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <section class="intro" id="features">
+        <div class="gradient-custom-2 h-100">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-light table-bordered mb-0">
+                                    <tr>
+                                        <th scope="col">EMPLOYEE ID </th>
+                                        <th scope="col">AMOUNT</th>
+                                        <th scope="col">EFFECTIVE DATE</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for result in results %}
+                                        <tr>
+                                            <th scope="row">{{colleague_id}}</th>
+                                            {% for column in columns %}
+                                            <td>{{ result[column] }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
