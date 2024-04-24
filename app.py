@@ -105,7 +105,8 @@ def acc_app():
 #----To render features of accrual app-----
 @app.route('/taken')
 def taken():
-    return render_template('new_taken.html')
+    cidInvalid = False
+    return render_template('new_taken.html', cidInvalid = cidInvalid)
 
 @app.route('/earned')
 def earned():
@@ -147,6 +148,13 @@ def Taken_count():
     tilldate_modified = tilldate_obj.strftime('%Y-%m-%d %H:%M:%S')
     
     colleague_id = request.form.get('CID')
+    
+    cidInValid = False
+
+    if(isValid(colleague_id) == False):
+        cidInValid = True
+        return render_template('new_taken.html', cidInValid = cidInValid )
+    
    
     # a=cursor.execute("select count(*) from WDMDEVICE where ENABLEDSW ='1'")
     cursor.execute("select SUM (amount/3600), EFFECTIVEDATE from ACCRUALTRAN A join PERSON P on P.PERSONID = A.PERSONID where ACCRUALCODEID = 2 and EFFECTIVEDATE BETWEEN ? AND ? and TYPE = 1 and P.PERSONNUM IN (?) GROUP BY TYPE, EFFECTIVEDATE", fromdate_modified,tilldate_modified,colleague_id)
@@ -195,10 +203,15 @@ def Earned_count():
     tilldate =  request.form.get('todate')
     tilldate_obj = datetime.fromisoformat(tilldate.replace('T', ' '))
     tilldate_modified = tilldate_obj.strftime('%Y-%m-%d %H:%M:%S')
+    
     colleague_id = request.form.get('CID')
     
-   
+    cidInValid = False
 
+    if(isValid(colleague_id) == False):
+        cidInValid = True
+        return render_template('new_earned.html', cidInValid = cidInValid )
+        
     cursor.execute("select SUM (amount/3600), EFFECTIVEDATE from ACCRUALTRAN A join PERSON P on P.PERSONID = A.PERSONID where ACCRUALCODEID = 2 and EFFECTIVEDATE BETWEEN ? AND ? and TYPE = 2 and P.PERSONNUM IN (?) GROUP BY TYPE, EFFECTIVEDATE", fromdate_modified,tilldate_modified,colleague_id)
     
     columns = [column[0] for column in cursor.description]
@@ -241,7 +254,14 @@ def Reset_count():
     tilldate =  request.form.get('todate')
     tilldate_obj = datetime.fromisoformat(tilldate.replace('T', ' '))
     tilldate_modified = tilldate_obj.strftime('%Y-%m-%d %H:%M:%S')
+    
     colleague_id = request.form.get('CID')
+    
+    cidInValid = False
+
+    if(isValid(colleague_id) == False):
+        cidInValid = True
+        return render_template('new_taken.html', cidInValid = cidInValid )
    
     cursor.execute("select SUM (amount/3600), EFFECTIVEDATE from ACCRUALTRAN A join PERSON P on P.PERSONID = A.PERSONID where ACCRUALCODEID = 2 and EFFECTIVEDATE BETWEEN ? AND ? and TYPE = 3 and P.PERSONNUM IN (?) GROUP BY TYPE, EFFECTIVEDATE", fromdate_modified,tilldate_modified,colleague_id)
     
@@ -344,6 +364,30 @@ def storeres_counts():
     
 
     return render_template('new_Storeresult.html',  columns=columns1, results=results1, store_id=store_id)
+
+def isValid(cid):
+    connection_string = ("Driver={ODBC Driver 17 for SQL Server};"
+                "Server=10.124.128.108;"
+                "Database=tkcsdb;"
+                "UID=ODBC_jsinfo;"
+                "PWD=%o0VO3ixiLZLB36ZkncZ;")
+    
+    connection = pyodbc.connect(connection_string)
+    cursor = connection.cursor()
+    
+    cursor.execute("select * from VP_ALLPERSONV42 where PERSONNUM = ?", cid)
+    
+    results = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+    
+    if not results:
+        return False
+    else:
+        return True
+    
+    
 
 #-------------Payroll section---------------#
 @app.route('/payroll_app')

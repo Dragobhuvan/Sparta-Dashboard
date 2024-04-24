@@ -75,6 +75,11 @@
             </form>
         </div>
     </section>
+    {% if cidInValid %}
+    <script>
+        alert("The colleague id is invalid, please provide a valid colleague id")
+    </script>
+    {% endif %}
 </body>
 
 </html>
