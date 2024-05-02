@@ -3,3 +3,10 @@ Mandatory fields
 Datetimelocal
 Report file download
 heloo test
+
+vp_allperson42 - companyhiredtm
+select COMPANYHIREDTM from VP_ALLPERSONV42 where PERSONNUM = '1024499'
+
+select P.PERSONNUM from ACCRUALTRAN A join PERSON P on P.PERSONID = A.PERSONID where ACCRUALCODEID = 2 and EFFECTIVEDATE 
+BETWEEN '2024-03-05 00:00:00' AND '2024-03-05 00:00:00' and TYPE = 3 GROUP BY PERSONNUM,EFFECTIVEDATE having count(type) >=1
+ORDER BY PERSONNUM,EFFECTIVEDATE

@@ -298,7 +298,7 @@ def M_rst_count():
     
     connection = pyodbc.connect(connection_string)
     cursor = connection.cursor()
-    
+
     fromdate =  request.form.get('fromdate')
     fromdate_obj = datetime.fromisoformat(fromdate.replace('T', ' '))
     fromdate_modified = fromdate_obj.strftime('%Y-%m-%d %H:%M:%S')
@@ -307,10 +307,11 @@ def M_rst_count():
     tilldate_obj = datetime.fromisoformat(tilldate.replace('T', ' '))
     tilldate_modified = tilldate_obj.strftime('%Y-%m-%d %H:%M:%S')
    
-    cursor.execute("select P.PERSONNUM,SUM (amount/3600),EFFECTIVEDATE from ACCRUALTRAN A join PERSON P on P.PERSONID = A.PERSONID where ACCRUALCODEID = 2 and EFFECTIVEDATE BETWEEN ? AND ? and TYPE = 3 GROUP BY PERSONNUM,EFFECTIVEDATE having count(type) >=1 ORDER BY PERSONNUM,EFFECTIVEDATE", fromdate_modified,tilldate_modified)
+    cursor.execute("select P.PERSONNUM,SUM (amount/3600),EFFECTIVEDATE,vp.companyhiredtm from ACCRUALTRAN A join PERSON P on P.PERSONID = A.PERSONID join VP_ALLPERSONV42 vp on vp.PERSONNUM =p.PERSONNUM where ACCRUALCODEID = 2 and EFFECTIVEDATE BETWEEN ? AND ? and TYPE = 3 GROUP BY p.PERSONNUM,EFFECTIVEDATE,vp.COMPANYHIREDTM having count(type) >=1 ORDER BY PERSONNUM,EFFECTIVEDATE", fromdate_modified,tilldate_modified)
     
     columns = [column[0] for column in cursor.description]
     results = [dict(zip(columns,row)) for row in cursor.fetchall()]
+
     
     lst = []
     for i in results:
@@ -326,8 +327,7 @@ def M_rst_count():
                 result[key] = '{:.2f}'.format(value)
     
 
-    return render_template('MRST_result.html',  columns=columns, results=results, fromdate=fromdate, tilldate=tilldate)
-
+    return render_template('MRST_result.html',  columns=columns, results=results, fromdate=fromdate_modified, tilldate=tilldate_modified)
 #Store resets
 @app.route('/storeres', methods=['GET','POST'])
 def storeres_counts():
